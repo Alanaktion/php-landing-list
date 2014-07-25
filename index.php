@@ -4,13 +4,14 @@ include "sites.php";
 
 $site_data = array();
 foreach($sites as $site) {
-	try {
-		$result = file_get_contents("http://" . $site["domain"] . "/?json=1");
+	/*try {
+		$result = file_get_contents("http://" . $site["domain"]);
 		$data = json_decode($result);
 	} catch(Exception $e) {
 		$data = new StdClass();
 		$data->error = 1;
-	}
+	}*/
+	$data = new StdClass();
 	$data->name = $site["name"];
 	$data->domain = $site["domain"];
 	$data->id = sha1($site["domain"]);
@@ -42,6 +43,8 @@ foreach($sites as $site) {
 					$server.find('.k-memory').val(data.memory).trigger("change");
 					if(data.swap_total) {
 						$server.find('.k-swap').val(data.swap).trigger("change");
+					} else {
+						$server.find('.swap').hide();
 					}
 
 				}, 'json').fail(function() {
@@ -69,9 +72,9 @@ foreach($sites as $site) {
 	</script>
 </head>
 <body>
-	<!-- <section class="header">
-		<h1>Status</h1>
-	</section> -->
+	<section class="header">
+		<!-- <h1>Status</h1> -->
+	</section>
 	<section class="list">
 		<?php foreach($site_data as $data) { ?>
 			<div class="status" id="<?php echo $data->id; ?>">
@@ -85,13 +88,11 @@ foreach($sites as $site) {
 							<b class="offline">Offline</b>
 						<?php } ?>
 						<div class="meters" style="<?php if(!empty($data->error)) echo 'display: none;'; ?>">
-							Uptime: <span class="uptime"><?php echo $data->uptime; ?></span>&emsp;
-							Disk usage: <input class="k-disk" value="<?php echo $data->disk; ?>">&emsp;
-							Memory: <input class="k-memory" value="<?php echo $data->memory; ?>">&emsp;
-							<?php if($data->swap_total) { ?>
-								Swap: <input class="k-swap" value="<?php echo $data->swap; ?>">&emsp;
-							<?php } ?>
-							CPU: <input class="k-cpu" value="<?php echo $data->cpu; ?>">&emsp;
+							Uptime: <span class="uptime"></span>&emsp;
+							Disk usage: <input class="k-disk">&emsp;
+							Memory: <input class="k-memory">&emsp;
+							<span class="swap">Swap: <input class="k-swap">&emsp;</span>
+							CPU: <input class="k-cpu">&emsp;
 						</div>
 						<script>servers.push('<?php echo $data->domain; ?>');</script>
 					</div>
