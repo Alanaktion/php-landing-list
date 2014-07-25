@@ -39,6 +39,7 @@ foreach($sites as $site) {
 					$server.find("meters").show();
 
 					$server.find('.uptime').text(data.uptime);
+					$server.find('.k-disk').val(data.disk).trigger("change");
 					$server.find('.k-cpu').val(data.cpu).trigger("change");
 					$server.find('.k-memory').val(data.memory).trigger("change");
 					if(data.swap_total) {
