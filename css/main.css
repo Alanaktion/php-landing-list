@@ -15,10 +15,7 @@ section.header {
 
 section.header h1 {
     font-size: 40px;
-}
-
-
-section.list {
+    font-weight: 100;
 }
 
 section.list .status {
@@ -26,9 +23,7 @@ section.list .status {
     height: 100px;
     width: 985px;
     border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
+    background: #222;
 }
 
 .status .left {
@@ -61,9 +56,6 @@ section.list .status {
     width: inherit;
     height: inherit;
     border-radius: inherit;
-    -webkit-border-radius: inherit;
-    -moz-border-radius: inherit;
-    -ms-border-radius: inherit;
 }
 
 canvas {
