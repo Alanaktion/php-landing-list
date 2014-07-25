@@ -50,7 +50,7 @@ foreach($sites as $site) {
 
 				}, 'json').fail(function() {
 					$server.find("meters").hide();
-					$("<b />").addClass("offline").text("Offline").appendTo($server);
+					$("<b />").addClass("offline").text("Offline").appendTo($server.find('.grey .right'));
 				});
 			});
 
@@ -85,9 +85,6 @@ foreach($sites as $site) {
 						<span><?php echo $data->ip; ?></span>
 					</div>
 					<div class="right">
-						<?php if(!empty($data->error)) { ?>
-							<b class="offline">Offline</b>
-						<?php } ?>
 						<div class="meters" style="<?php if(!empty($data->error)) echo 'display: none;'; ?>">
 							Uptime: <span class="uptime"></span>&emsp;
 							Disk usage: <input class="k-disk">&emsp;
